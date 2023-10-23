@@ -80,7 +80,19 @@ func (s *server) msg(c *client, args []string) {
 }
 
 
-
+func(s *server) bot(){
+	conn, err := net.Dial("tcp", ":8888")
+	if err != nil{
+		return
+	}
+	for {
+		msg, err := bufio.NewReader(conn).ReadString('\n')
+		
+	}
+	
+	
+	
+}
 
 func (s *server) quit(c *client) {
 	log.Printf("conexão terminada: %s", c.conn.RemoteAddr().String())
