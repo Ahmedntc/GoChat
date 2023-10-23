@@ -2,7 +2,7 @@ package main
 
 import (
 	"bufio"
-	"fmt"
+	//"fmt"
 	"net"
 	"strings"
 )
@@ -19,49 +19,31 @@ func (c *client) command() {
 		if err != nil {
 			return
 		}
-
 		msg = strings.Trim(msg, "\r\n")
-
 		args := strings.Split(msg, " ")
 		cmd := strings.TrimSpace(args[0])
-
 		switch cmd {
 		case "/nick":
 			c.commands <- command{
-				id:     CMD_NICK,
-				client: c,
-				args:   args,
-			}
-
-		case "/change":
-			c.commands <- command{
-				id:     CMD_CHN,
+				id:    nick,
 				client: c,
 				args:   args,
 			}
 		case "/msg":
 			c.commands <- command{
-				id:     CMD_MSG,
+				id:     mesg,
 				client: c,
 				args:   args,
 			}
 		case "/quit":
 			c.commands <- command{
-				id:     CMD_QUIT,
+				id:     quit,
 				client: c,
 			}
 		default:
-			c.err(fmt.Errorf("comando desconhecido: %s", cmd))
+			c.conn.Write([]byte(">Comando Desconhecido\n"))
 		}
 	}
-}
-
-func (c *client) err(err error) {
-	c.conn.Write([]byte("err: " + err.Error() + "\n"))
-}
-
-func (c *client) msg(msg string) {
-	c.conn.Write([]byte("> " + msg + "\n"))
 }
 
 

@@ -9,16 +9,16 @@ func main() {
 	s := newServer()
 	go s.run()
 
-	listener, err := net.Listen("tcp", ":8888")
+	l, err := net.Listen("tcp", ":8888")
 	if err != nil {
 		log.Fatalf("falha em subir servidor: %s", err.Error())
 	}
 
-	defer listener.Close()
+	defer l.Close()
 	log.Printf("server aberto em :8888")
 
 	for {
-		conn, err := listener.Accept()
+		conn, err := l.Accept()
 		if err != nil {
 			log.Printf("falha ao conectar: %s", err.Error())
 			continue

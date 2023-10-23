@@ -28,13 +28,11 @@ func newServer() *server {
 func (s *server) run() {
 	for cmd := range s.commands {
 		switch cmd.id {
-		case CMD_NICK:
+		case nick:
 			s.nick(cmd.client, cmd.args)
-		case CMD_CHN:
-			s.change(cmd.client, cmd.args)
-		case CMD_MSG:
+		case mesg:
 			s.msg(cmd.client, cmd.args)
-		case CMD_QUIT:
+		case quit:
 			s.quit(cmd.client)
 		}
 	}
@@ -51,14 +49,22 @@ func (s *server) newClient(conn net.Conn) *client {
 }
 
 func (s *server) nick(c *client, args []string) {
-	c.nick = args[1]
-	c.msg(fmt.Sprintf("%s conectou", c.nick))
+	if len(args) < 2 {
+		c.conn.Write([]byte("> Nick não pode ser vazio\n"))
+		return
+	}
+	if c.nick != " "{
+		c.nick = args[1]
+		c.conn.Write([]byte(fmt.Sprintf("> %s é seu novo nick\n",c.nick)))
+	}else{
+		c.nick = args[1]
+		c.conn.Write([]byte(fmt.Sprintf("> %s conectou\n",c.nick)))
+	}
+
+
 }
 
-func (s *server) change(c *client, args []string) {
-	c.nick = args[1]
-	c.msg(fmt.Sprintf("%s é seu novo nick", c.nick))
-}
+
 
 
 func (s *server) msg(c *client, args []string) {
@@ -66,7 +72,7 @@ func (s *server) msg(c *client, args []string) {
 	msg := strings.Join(args[1:], " ")
 
 	c.conn.Write([]byte(fmt.Sprintf("%s: %s", c.nick, msg)))
-	log.Printf("User %s enviou: %s", c.nick, msg)
+	log.Printf("User %s enviou: %s\n", c.nick, msg)
 
 	msgRev := reverse(msg)
 	c.conn.Write([]byte(fmt.Sprintf("\nServer replied : %s",msgRev)))

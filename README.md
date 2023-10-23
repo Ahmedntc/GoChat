@@ -8,7 +8,6 @@ Em seguida em outro terminal devemos conectar ao server para isso deve-se utiliz
 - `telnet localhost 8888` - o numero da porta retorna ao executar o nosso programa
 # Comandos
 
-- `/nick <seu nome>` - escolher o seu nick
-- `/change <mudar seu nome>` - mudar o nick
+- `/nick <seu nome>` - escolher o seu nick caso queira mudar de nick basta apenas utilizar este comando novamente
 - `/msg <destinatario, mensagem>` - enviar uma mensagem
 - `/quit` - desconecta do server
