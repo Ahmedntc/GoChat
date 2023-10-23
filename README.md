@@ -1,8 +1,10 @@
-# GoChat
-goLang TCP chat server
-Primeiramente em um terminal devemos executar o nosso programa
-em seguida em outro terminal devemos conectar ao server para isso deve-se utilizar o seguinte comando:
-- `telnet localhost <numero da porta>` - o numero da porta retorna ao executar o nosso programa
+# Chat server TCP em Golang
+
+Primeiramente em um terminal devemos executar o nosso programa:
+- para isso utilize o comando go build . e depois ./GoChat \
+
+Em seguida em outro terminal devemos conectar ao server para isso deve-se utilizar o seguinte comando:
+- `telnet localhost 8888` - o numero da porta retorna ao executar o nosso programa
 # Comandos
 
 - `/nick <seu nome>` - escolher o seu nick
