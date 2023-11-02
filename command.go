@@ -6,6 +6,7 @@ const (
 	nick commandID = iota
 	mesg
 	quit
+	priv
 )
 
 type command struct {

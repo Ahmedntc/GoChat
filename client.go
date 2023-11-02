@@ -35,6 +35,12 @@ func (c *client) command() {
 				client: c,
 				args:   args,
 			}
+		case "/priv":
+			c.commands <- command{
+				id:     priv,
+				client: c,
+				args:   args,
+			}
 		case "/quit":
 			c.commands <- command{
 				id:     quit,

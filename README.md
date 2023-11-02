@@ -9,5 +9,6 @@ Em seguida em outro terminal devemos conectar ao server para isso deve-se utiliz
 # Comandos
 
 - `/nick <seu nome>` - escolher o seu nick caso queira mudar de nick basta apenas utilizar este comando novamente
-- `/msg <destinatario, mensagem>` - enviar uma mensagem
+- `/priv <destinatario: mensagem>` - enviar uma mensagem privada
+- `/msg <mensagem>` - enviar uma mensagem a todas conexões
 - `/quit` - desconecta do server
